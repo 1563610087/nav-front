@@ -1,6 +1,6 @@
 <template>
   <div class="home-container">
-    <div class="home-text">hello,大家好</div>
+    <div class="home-text">hello,大家好我是社会化</div>
   </div>
 </template>
 
