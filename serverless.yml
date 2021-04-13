@@ -1,0 +1,15 @@
+# 引用 component 的名称
+component: website
+# 该 website 组件创建的实例名称
+name: vue-yaosheng-front
+# 该 website 应用名称
+app: ufo-nav-front
+# 组件参数配置，根据每个组件，实现具体的资源信息配置
+inputs:
+  src:
+    src: ./src #构建的项目代码目录
+    hook: npm run build:prod #钩子脚本。在你项目代码上传之前执行
+    dist: ./dist #钩子脚本执行构建后，输出的目录
+    index: index.html
+  bucketName: my-vue-starter
+  protocol: https
