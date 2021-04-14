@@ -1,6 +1,6 @@
 <template>
   <div class="home-container">
-    <div class="home-text">hello,大家好我是社会化</div>
+    <div class="home-text">hello,接口测试</div>
   </div>
 </template>
 
@@ -11,6 +11,9 @@ export default {
   name: 'Dashboard',
   computed: {
     ...mapGetters(['name'])
+  },
+  created() {
+    console.log(process.env)
   }
 }
 </script>

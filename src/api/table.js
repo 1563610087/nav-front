@@ -1,4 +1,11 @@
 import axios from 'axios'
+// const service = axios.create({
+//   baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
+//   // withCredentials: true, // send cookies when cross-domain requests
+//   timeout: 5000 // request timeout
+// })
+
+axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? '' : 'https://service-ij349dpk-1258823847.gz.apigw.tencentcs.com/release/'
 
 axios.interceptors.response.use(function(res) {
   if (res.status === 200) {

@@ -11,5 +11,7 @@ inputs:
     hook: npm run build:prod #钩子脚本。在你项目代码上传之前执行
     dist: ./dist #钩子脚本执行构建后，输出的目录
     index: index.html
-  bucketName: my-vue-starter
+  bucketName: ufo-nav-front
   protocol: https
+  env:
+    apiUrl: https://service-ij349dpk-1258823847.gz.apigw.tencentcs.com/release/
