@@ -2,21 +2,20 @@
   <div class="web-container">
     <div class="title">
       <div>
-        <i class="el-icon-star-off"></i>
+        <i class="el-icon-star-off" />
         {{ data.web_name }}
       </div>
-      <div v-if="settingStatus" >
-        <el-button @click="changeStatus" type="primary" size="small" round>设置</el-button>
+      <div v-if="settingStatus">
+        <el-button type="primary" size="small" round @click="changeStatus">设置</el-button>
       </div>
       <div v-else>
         <el-button
           type="primary"
           size="small"
           round
-          @click="handleSite"
           class="el-icon-plus"
-          >添加网站</el-button
-        >
+          @click="handleSite"
+        >添加网站</el-button>
         <el-button type="success" size="small" round>排序</el-button>
         <el-button
           type="warning"
@@ -24,19 +23,20 @@
           round
           icon="el-icon-edit"
           @click="getIcon('edit')"
-          >编辑</el-button
-        >
+        >编辑</el-button>
         <el-button
           type="danger"
           size="small"
           round
           icon="el-icon-delete"
           @click="getIcon('delete')"
-          >删除</el-button
-        >
-        <el-button type="info" size="small" round @click="changeStatus"
-          >完成</el-button
-        >
+        >删除</el-button>
+        <el-button
+          type="info"
+          size="small"
+          round
+          @click="changeStatus"
+        >完成</el-button>
       </div>
     </div>
     <div class="websites">
@@ -57,37 +57,37 @@
           :class="iconStatus === 'delete' ? 'el-icon-error' : 'el-icon-edit'"
           class="delete"
           @click="handleStatus(item)"
-        ></span>
+        />
       </div>
     </div>
     <!-- 添加网站或更新网站 -->
     <el-dialog
-      :title="this.iconStatus === 'edit' ? '编辑网站' : '添加网站'"
+      :title="iconStatus === 'edit' ? '编辑网站' : '添加网站'"
       :visible.sync="addSiteDialog"
       width="400px"
     >
       <el-form
+        ref="ruleForm"
         :model="addSite"
         :rules="rules"
-        ref="ruleForm"
         label-width="100px"
         class="demo-ruleForm"
       >
         <el-form-item label="网站名称:" prop="siteName">
           <el-input
+            v-model="addSite.siteName"
             size="medium"
             placeholder="请输入网站名称"
-            v-model="addSite.siteName"
             clearable
-          ></el-input>
+          />
         </el-form-item>
         <el-form-item label="网站地址:" prop="siteUrl">
           <el-input
+            v-model="addSite.siteUrl"
             size="medium"
             placeholder="请输入网站地址"
-            v-model="addSite.siteUrl"
             clearable
-          ></el-input>
+          />
         </el-form-item>
         <el-form-item label="网站描述:">
           <el-input
@@ -95,16 +95,19 @@
             size="medium"
             placeholder="请输入网站描述"
             clearable
-          ></el-input>
+          />
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
-        <el-button size="medium" @click="addSiteDialog = false"
-          >取 消</el-button
-        >
-        <el-button size="medium" type="primary" @click="addSite2('ruleForm')"
-          >确 定</el-button
-        >
+        <el-button
+          size="medium"
+          @click="addSiteDialog = false"
+        >取 消</el-button>
+        <el-button
+          size="medium"
+          type="primary"
+          @click="addSite2('ruleForm')"
+        >确 定</el-button>
       </span>
     </el-dialog>
     <!-- 删除网站 -->
@@ -115,115 +118,117 @@
         <el-button type="primary" @click="deleteSite">确 定</el-button>
       </span>
     </el-dialog>
+    <!-- 回到顶部 -->
   </div>
 </template>
 
 <script>
-import { addSite, delSite, updateSite } from "@/api/table";
+import { addSite, delSite, updateSite } from '@/api/table'
 export default {
   props: {
     data: {
       type: Object,
-    },
+      required: true
+    }
   },
   data() {
     return {
       settingStatus: true,
       settingVisible: false,
-      addSiteDialog: false,//添加网站
+      addSiteDialog: false, // 添加网站
       showIcon: false,
-      iconStatus: "delete",
+      iconStatus: 'delete',
       editSiteVisible: false,
       deleteVisible: false,
       currentItem: {},
       addSite: {
-        siteName: "",
-        siteUrl: "",
+        siteName: '',
+        siteUrl: '',
         websiteId: this.data.website_id,
-        siteDescribe: "",
-        siteId: "",
+        siteDescribe: '',
+        siteId: ''
       },
       rules: {
         siteName: [
-          { required: true, message: "请输入网站名称", trigger: "blur" },
-          { min: 0, max: 20, message: "长度在 0 到 20个字符", trigger: "blur" },
+          { required: true, message: '请输入网站名称', trigger: 'blur' },
+          { min: 0, max: 20, message: '长度在 0 到 20个字符', trigger: 'blur' }
         ],
         siteUrl: [
-          { required: true, message: "请输入网站地址", trigger: "blur" },
-        ],
-      },
-    };
+          { required: true, message: '请输入网站地址', trigger: 'blur' }
+        ]
+      }
+    }
   },
   watch: {},
 
   methods: {
     handleDialog() {
-      this.settingVisible = true;
+      this.settingVisible = true
     },
     changeStatus() {
-      this.settingStatus = !this.settingStatus;
-      this.showIcon = false;
+      this.settingStatus = !this.settingStatus
+      this.showIcon = false
     },
-    //设置添加网站状态
-    handleSite(){
-      this.addSiteDialog=true
-      this.editSiteVisible=false
+    // 设置添加网站状态
+    handleSite() {
+      this.addSiteDialog = true
+      this.editSiteVisible = false
     },
     getIcon(type) {
-      this.showIcon = !this.showIcon;
-      this.iconStatus = type;
+      this.showIcon = !this.showIcon
+      this.iconStatus = type
     },
-    //图标编辑状态或者删除状态
+    // 图标编辑状态或者删除状态
     handleStatus(item) {
-      this.currentItem=item
-      if (this.iconStatus === "edit") {
+      this.currentItem = item
+      if (this.iconStatus === 'edit') {
         this.addSite = {
-          siteName:item.site_name,
-          siteUrl:item.site_url,
-          websiteId:item.website_id,
-          siteDescribe:item.site_describe,
-          siteId:item.site_id
-        };
-        this.addSiteDialog = true;
-        this.editSiteVisible = true;
+          siteName: item.site_name,
+          siteUrl: item.site_url,
+          websiteId: item.website_id,
+          siteDescribe: item.site_describe,
+          siteId: item.site_id
+        }
+        this.addSiteDialog = true
+        this.editSiteVisible = true
       } else {
-        this.deleteVisible = true;
+        this.deleteVisible = true
       }
     },
-    //重置数据
+    // 重置数据
     resetData() {
       this.addSite = {
-        siteName: "",
-        siteUrl: "",
+        siteName: '',
+        siteUrl: '',
         websiteId: this.data.website_id,
-        siteDescribe: "",
-        siteId:""
-      };
+        siteDescribe: '',
+        siteId: ''
+      }
     },
-    //添加或者编辑网站
+    // 添加或者编辑网站
     addSite2(formName) {
-      const getdata = this.editSiteVisible ? updateSite : addSite;
+      const getdata = this.editSiteVisible ? updateSite : addSite
       this.$refs[formName].validate((valid) => {
         if (valid) {
           getdata(this.addSite).then(() => {
-            this.addSiteDialog = false;
-            this.$parent.getData();
-            this.resetData();
-          });
+            this.addSiteDialog = false
+            this.$parent.getData()
+            this.resetData()
+          })
         } else {
-          return false;
+          return false
         }
-      });
+      })
     },
-    //删除网站
+    // 删除网站
     deleteSite() {
       delSite({ siteId: this.currentItem.site_id }).then(() => {
-        this.deleteVisible = false;
-        this.$parent.getData();
-      });
-    },
-  },
-};
+        this.deleteVisible = false
+        this.$parent.getData()
+      })
+    }
+  }
+}
 </script>
 <style lang="scss" scoped>
 .web-container {

@@ -40,7 +40,20 @@ export const constantRoutes = [
         path: 'frontend',
         name: '前端开发',
         component: () => import('@/views/frontend/index'),
-        meta: { title: '前端开发', icon: 'tree' }
+        meta: { title: '前端开发', icon: 'el-icon-s-platform' }
+      }
+    ]
+  },
+  {
+    path: '/backend',
+    component: Layout,
+    meta: { title: '后端开发', icon: 'el-icon-s-help' },
+    children: [
+      {
+        path: 'backend',
+        name: '后端开发',
+        component: () => import('@/views/backend/index'),
+        meta: { title: '后端开发', icon: 'el-icon-s-order' }
       }
     ]
   },
@@ -53,7 +66,7 @@ export const constantRoutes = [
         path: 'life',
         name: '生活娱乐',
         component: () => import('@/views/life/index'),
-        meta: { title: '生活娱乐', icon: 'tree' }
+        meta: { title: '生活娱乐', icon: 'el-icon-headset' }
       }
     ]
   },
@@ -66,7 +79,33 @@ export const constantRoutes = [
         path: 'study',
         name: '学习提升',
         component: () => import('@/views/study/index'),
-        meta: { title: '学习提升', icon: 'tree' }
+        meta: { title: '学习提升', icon: 'el-icon-edit' }
+      }
+    ]
+  },
+  {
+    path: '/tools',
+    component: Layout,
+    meta: { title: '软件工具', icon: 'el-icon-s-help' },
+    children: [
+      {
+        path: 'tools',
+        name: '软件工具',
+        component: () => import('@/views/tools/index'),
+        meta: { title: '软件工具', icon: 'el-icon-s-cooperation' }
+      }
+    ]
+  },
+  {
+    path: '/resources',
+    component: Layout,
+    meta: { title: '资源素材', icon: 'el-icon-s-help' },
+    children: [
+      {
+        path: 'resources',
+        name: '资源素材',
+        component: () => import('@/views/resources/index'),
+        meta: { title: '资源素材', icon: 'el-icon-picture' }
       }
     ]
   },

@@ -4,20 +4,17 @@
     <div v-for="item in data.list" :key="item.id" class="app-container">
       <webcontainer :data="item" />
     </div>
-    <GoTop />
   </div>
 </template>
 
 <script>
 import webcontainer from '@/components/Webcontainer'
-import GoTop from '@/components/goTop'
 import searchSite from '@/components/searchSite'
 import { allSites } from '@/api/table'
 export default {
   components: {
     webcontainer,
-    searchSite,
-    GoTop
+    searchSite
   },
   data() {
     return {
@@ -35,7 +32,7 @@ export default {
   methods: {
     getData() {
       const param = {
-        classifyId: 1,
+        classifyId: 7,
         classifyType: '1'
       }
       allSites(param).then(({ data }) => {

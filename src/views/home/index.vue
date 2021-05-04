@@ -1,19 +1,19 @@
 <template>
   <div class="home-container">
-    <div class="home-text">hello,接口测试</div>
+    <SearchEngine />
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import SearchEngine from '@/components/SearchEngine'
 
 export default {
-  name: 'Dashboard',
-  computed: {
-    ...mapGetters(['name'])
+  name: 'Home',
+  components: {
+    SearchEngine
   },
-  created() {
-    console.log(process.env)
+  data() {
+    return {}
   }
 }
 </script>

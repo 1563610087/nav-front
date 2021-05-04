@@ -63,3 +63,22 @@ div:focus {
 .app-container {
   padding: 20px;
 }
+
+//全局统一样式
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cursor{
+  cursor: pointer;
+}
+
+.cursor:hover {
+  color: #409EFF;
+}
+
+.active {
+  color: #409EFF;
+}
