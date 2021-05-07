@@ -28,7 +28,8 @@ export const constantRoutes = [
       name: '首页',
       component: () => import('@/views/home/index'),
       meta: { title: '首页', icon: 'dashboard' }
-    }]
+    }],
+    hidden: true
   },
 
   {
@@ -39,8 +40,8 @@ export const constantRoutes = [
       {
         path: 'frontend',
         name: '前端开发',
-        component: () => import('@/views/frontend/index'),
-        meta: { title: '前端开发', icon: 'el-icon-s-platform' }
+        component: () => import('@/views/website/index'),
+        meta: { title: '前端开发', icon: 'el-icon-s-platform', id: 1 }
       }
     ]
   },
@@ -52,8 +53,8 @@ export const constantRoutes = [
       {
         path: 'backend',
         name: '后端开发',
-        component: () => import('@/views/backend/index'),
-        meta: { title: '后端开发', icon: 'el-icon-s-order' }
+        component: () => import('@/views/website/index'),
+        meta: { title: '后端开发', icon: 'el-icon-s-order', id: 7 }
       }
     ]
   },
@@ -65,8 +66,8 @@ export const constantRoutes = [
       {
         path: 'life',
         name: '生活娱乐',
-        component: () => import('@/views/life/index'),
-        meta: { title: '生活娱乐', icon: 'el-icon-headset' }
+        component: () => import('@/views/website/index'),
+        meta: { title: '生活娱乐', icon: 'el-icon-headset', id: 2 }
       }
     ]
   },
@@ -78,8 +79,21 @@ export const constantRoutes = [
       {
         path: 'study',
         name: '学习提升',
-        component: () => import('@/views/study/index'),
-        meta: { title: '学习提升', icon: 'el-icon-edit' }
+        component: () => import('@/views/website/index'),
+        meta: { title: '学习提升', icon: 'el-icon-edit', id: 6 }
+      }
+    ]
+  },
+  {
+    path: '/resources',
+    component: Layout,
+    meta: { title: '图片素材', icon: 'el-icon-s-help' },
+    children: [
+      {
+        path: 'resources',
+        name: '图片素材',
+        component: () => import('@/views/website/index'),
+        meta: { title: '图片素材', icon: 'el-icon-picture', id: 3 }
       }
     ]
   },
@@ -91,21 +105,8 @@ export const constantRoutes = [
       {
         path: 'tools',
         name: '软件工具',
-        component: () => import('@/views/tools/index'),
-        meta: { title: '软件工具', icon: 'el-icon-s-cooperation' }
-      }
-    ]
-  },
-  {
-    path: '/resources',
-    component: Layout,
-    meta: { title: '资源素材', icon: 'el-icon-s-help' },
-    children: [
-      {
-        path: 'resources',
-        name: '资源素材',
-        component: () => import('@/views/resources/index'),
-        meta: { title: '资源素材', icon: 'el-icon-picture' }
+        component: () => import('@/views/website/index'),
+        meta: { title: '软件工具', icon: 'el-icon-s-cooperation', id: 4 }
       }
     ]
   },
