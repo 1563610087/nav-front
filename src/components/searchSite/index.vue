@@ -35,6 +35,7 @@
             size="medium"
             placeholder="请输入分类名称"
             clearable
+            @keyup.native.enter="handleClass"
           />
         </el-form-item>
       </el-form>

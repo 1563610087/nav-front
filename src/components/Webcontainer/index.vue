@@ -6,7 +6,12 @@
         {{ data.web_name }}
       </div>
       <div v-if="settingStatus">
-        <el-button type="primary" size="small" round @click="changeStatus">设置</el-button>
+        <el-button
+          type="primary"
+          size="small"
+          round
+          @click="changeStatus"
+        >设置</el-button>
       </div>
       <div v-else>
         <el-button
@@ -41,11 +46,14 @@
     </div>
     <div class="websites">
       <div v-for="item in data.list" :key="item.id" class="item">
-        <a :href="item.site_url" target="blank">
+        <a :href="item.site_url" target="_blank">
           <div class="item-wraper">
             <div>
-              <!-- <img :src="item.site_url + '/favicon.ico'" /> -->
-              <!-- <img src='../../../public/favicon.ico'> -->
+              <img
+                :src="item.icon_url"
+                onerror="src='https://static.runoob.com/images/favicon.ico';onerror=null"
+              >
+              <!-- <img src="@/assets/default.png"> -->
               {{ item.site_name }}
             </div>
             <div>{{ item.site_describe }}</div>
@@ -64,7 +72,7 @@
     <el-dialog
       :title="iconStatus === 'edit' ? '编辑网站' : '添加网站'"
       :visible.sync="addSiteDialog"
-      width="400px"
+      width="450px"
     >
       <el-form
         ref="ruleForm"
@@ -79,7 +87,9 @@
             size="medium"
             placeholder="请输入网站名称"
             clearable
+            style="width: 230px;margin-right:10px"
           />
+          <el-button type="success" size="medium" @click="getWebIcon">图标</el-button>
         </el-form-item>
         <el-form-item label="网站地址:" prop="siteUrl">
           <el-input
@@ -87,6 +97,7 @@
             size="medium"
             placeholder="请输入网站地址"
             clearable
+            @keyup.native.enter="addSite2('ruleForm')"
           />
         </el-form-item>
         <el-form-item label="网站描述:">
@@ -95,7 +106,19 @@
             size="medium"
             placeholder="请输入网站描述"
             clearable
+            @keyup.native.enter="addSite2('ruleForm')"
           />
+        </el-form-item>
+        <el-form-item label="网站图标:">
+          <el-input
+            v-model="addSite.iconUrl"
+            size="medium"
+            placeholder="请输入网站图标"
+            clearable
+            style="width: 230px;margin-right:10px"
+            @keyup.native.enter="addSite2('ruleForm')"
+          />
+          <el-button type="success" size="medium" @click="manualAdd">添加</el-button>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -123,7 +146,7 @@
 </template>
 
 <script>
-import { addSite, delSite, updateSite } from '@/api/table'
+import { addSite, delSite, updateSite, getIcon } from '@/api/table'
 export default {
   props: {
     data: {
@@ -146,7 +169,8 @@ export default {
         siteUrl: '',
         websiteId: this.data.website_id,
         siteDescribe: '',
-        siteId: ''
+        siteId: '',
+        iconUrl: ''
       },
       rules: {
         siteName: [
@@ -187,7 +211,8 @@ export default {
           siteUrl: item.site_url,
           websiteId: item.website_id,
           siteDescribe: item.site_describe,
-          siteId: item.site_id
+          siteId: item.site_id,
+          iconUrl: item.icon_url
         }
         this.addSiteDialog = true
         this.editSiteVisible = true
@@ -202,15 +227,16 @@ export default {
         siteUrl: '',
         websiteId: this.data.website_id,
         siteDescribe: '',
-        siteId: ''
+        siteId: '',
+        iconUrl: ''
       }
     },
     // 添加或者编辑网站
     addSite2(formName) {
-      const getdata = this.editSiteVisible ? updateSite : addSite
+      const addOrUpdate = this.editSiteVisible ? updateSite : addSite
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          getdata(this.addSite).then(() => {
+          addOrUpdate(this.addSite).then(() => {
             this.addSiteDialog = false
             this.$parent.getData()
             this.resetData()
@@ -226,6 +252,32 @@ export default {
         this.deleteVisible = false
         this.$parent.getData()
       })
+    },
+    // 获取网站图标
+    getWebIcon() {
+      if (this.addSite.siteUrl === '') {
+        this.$message.error('请输入网址')
+      } else {
+        const params = { siteUrl: this.addSite.siteUrl }
+        getIcon(params).then(res => {
+          if (res.error_code === 0) {
+            this.addSite.iconUrl = res.data.iconUrl
+            this.$message.success(res.msg)
+          } else {
+            this.$message.error(res.message)
+          }
+        })
+      }
+    },
+    // 手动添加网站图标地址
+    manualAdd() {
+      const url = this.addSite.siteUrl
+      if (url === '') {
+        this.$message.error('请输入网址')
+      } else {
+        const website = url.split('/').slice(0, 3).join('/')
+        this.addSite.iconUrl = website + '/favicon.ico'
+      }
     }
   }
 }

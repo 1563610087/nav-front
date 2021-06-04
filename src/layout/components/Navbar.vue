@@ -5,9 +5,7 @@
       class="hamburger-container"
       @toggleClick="toggleSideBar"
     />
-
-    <breadcrumb class="breadcrumb-container" />
-
+    <weather />
     <div class="right-menu">
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
@@ -30,13 +28,13 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
+import weather from '@/components/weather'
 
 export default {
   components: {
-    Breadcrumb,
-    Hamburger
+    Hamburger,
+    weather
   },
   computed: {
     ...mapGetters(['sidebar', 'avatar'])
@@ -56,7 +54,7 @@ export default {
 <style lang="scss" scoped>
 .navbar {
   height: 50px;
-  overflow: hidden;
+  // overflow: hidden;
   position: relative;
   background: #fff;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
@@ -129,5 +127,9 @@ export default {
       }
     }
   }
+}
+
+.weather{
+  display: inline-block;
 }
 </style>
