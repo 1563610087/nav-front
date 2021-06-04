@@ -51,7 +51,7 @@
             <div>
               <img
                 :src="item.icon_url"
-                onerror="src='https://static.runoob.com/images/favicon.ico';onerror=null"
+                onerror="src='https://www.htmltrip.com/wp-content/themes/webstackpro/images/favicon.png';onerror=null"
               >
               <!-- <img src="@/assets/default.png"> -->
               {{ item.site_name }}

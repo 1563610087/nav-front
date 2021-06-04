@@ -9,7 +9,7 @@ import store from './store'
 import router from './router'
 // import '@/common/directive/directive.js'
 import '@/icons' // icon
-// import '@/permission'
+// import '@/common/js/permission'
 
 Vue.use(ElementUI)
 
