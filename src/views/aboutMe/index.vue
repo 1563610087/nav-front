@@ -1,5 +1,6 @@
 <template>
   <div class="app-container">
+    <button @click="hh" />
     关于我
   </div>
 </template>
@@ -9,7 +10,11 @@ export default {
     return {}
   },
   watch: {},
-  methods: {}
+  methods: {
+    hh() {
+      console.log(2)
+    }
+  }
 }
 </script>
 <style scoped>
