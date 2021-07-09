@@ -8,7 +8,6 @@ import App from './App'
 import store from './store'
 import router from './router'
 // import '@/common/directive/directive.js'
-import '@/icons' // icon
 // import '@/common/js/permission'
 
 Vue.use(ElementUI)

@@ -5,7 +5,8 @@ import axios from 'axios'
 //   timeout: 5000 // request timeout
 // })
 
-axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? '' : 'https://service-ij349dpk-1258823847.gz.apigw.tencentcs.com/release/'
+// axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? '' : 'https://service-ij349dpk-1258823847.gz.apigw.tencentcs.com/release/'
+axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? '' : 'https://service-a7y5tr6y-1258823847.gz.apigw.tencentcs.com/release/'
 
 axios.interceptors.response.use(function(res) {
   if (res.status === 200) {

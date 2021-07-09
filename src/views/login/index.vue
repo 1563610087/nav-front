@@ -7,9 +7,7 @@
       </div>
 
       <el-form-item prop="username">
-        <span class="svg-container">
-          <svg-icon icon-class="user" />
-        </span>
+        <span class="svg-container" />
         <el-input
           ref="username"
           v-model="loginForm.username"
@@ -22,9 +20,7 @@
       </el-form-item>
 
       <el-form-item prop="password">
-        <span class="svg-container">
-          <svg-icon icon-class="password" />
-        </span>
+        <span class="svg-container" />
         <el-input
           :key="passwordType"
           ref="password"
@@ -36,15 +32,12 @@
           auto-complete="on"
           @keyup.enter.native="handleLogin"
         />
-        <span class="show-pwd" @click="showPwd">
-          <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
-        </span>
+        <span class="show-pwd" @click="showPwd" />
       </el-form-item>
 
       <el-button
         :loading="loading"
-        type="primary"
-        style="width:100%;margin-bottom:30px;"
+        style="width:100%;margin-bottom:30px;color:white"
         @click.native.prevent="handleLogin"
       >登录</el-button>
 
@@ -87,7 +80,7 @@ export default {
         if (valid) {
           this.loading = true
           this.$store.dispatch('user/login', this.loginForm).then(() => {
-            this.$router.push({ path: this.redirect || '/' })
+            this.$router.push({ path: '/' })
             this.loading = false
           }).catch(() => {
             this.loading = false
@@ -115,6 +108,7 @@ $cursor: #fff;
 
 /* reset element-ui css */
 .login-container {
+  background-image: url('../../../static/image/wallhaven-8ogod1.jpg');
   .el-input {
     display: inline-block;
     height: 47px;
@@ -149,7 +143,7 @@ $cursor: #fff;
 <style lang="scss" scoped>
 $bg:#2d3a4b;
 $dark_gray:#889aa4;
-$light_gray:#eee;
+$light_gray:#2F6C7F;
 
 .login-container {
   min-height: 100%;
@@ -158,11 +152,12 @@ $light_gray:#eee;
   overflow: hidden;
 
   .login-form {
+    background-color:rgba(247, 226, 226, 0.5);
     position: relative;
     width: 520px;
     max-width: 100%;
-    padding: 160px 35px 0;
-    margin: 0 auto;
+    padding: 30px;
+    margin: 160px auto;
     overflow: hidden;
   }
 
@@ -206,6 +201,10 @@ $light_gray:#eee;
     color: $dark_gray;
     cursor: pointer;
     user-select: none;
+  }
+
+  .el-button {
+    background-color:$light_gray ;
   }
 }
 </style>
