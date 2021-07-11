@@ -1,16 +1,22 @@
 <template>
   <div class="login-container">
-    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
-
+    <el-form
+      ref="loginForm"
+      :model="loginForm"
+      :rules="loginRules"
+      class="login-form"
+      auto-complete="on"
+      label-position="left"
+    >
       <div class="title-container">
         <h3 class="title">哈哈哈</h3>
       </div>
 
-      <el-form-item prop="username">
+      <el-form-item prop="userName">
         <span class="svg-container" />
         <el-input
           ref="username"
-          v-model="loginForm.username"
+          v-model="loginForm.userName"
           placeholder="Username"
           name="username"
           type="text"
@@ -37,26 +43,25 @@
 
       <el-button
         :loading="loading"
-        style="width:100%;margin-bottom:30px;color:white"
+        style="width: 100%; margin-bottom: 30px; color: white"
         @click.native.prevent="handleLogin"
       >登录</el-button>
-
     </el-form>
   </div>
 </template>
 
 <script>
-
+import { login, logout, getInfo } from '@/api/user'
 export default {
   name: 'Login',
   data() {
     return {
       loginForm: {
-        username: 'admin',
+        userName: 'admin',
         password: '111111'
       },
       loginRules: {
-        username: [{ required: true, trigger: 'blur' }],
+        userName: [{ required: true, trigger: 'blur' }],
         password: [{ required: true, trigger: 'blur' }]
       },
       loading: false,
@@ -76,15 +81,21 @@ export default {
       })
     },
     handleLogin() {
-      this.$refs.loginForm.validate(valid => {
+      this.$refs.loginForm.validate((valid) => {
         if (valid) {
           this.loading = true
-          this.$store.dispatch('user/login', this.loginForm).then(() => {
-            this.$router.push({ path: '/' })
-            this.loading = false
-          }).catch(() => {
-            this.loading = false
-          })
+          login(this.loginForm)
+            .then((res) => {
+              if (res.error_code === 0) {
+                console.log(res.data.token, 2)
+                sessionStorage.setItem('token', res.data.token)
+                this.$router.push({ path: '/' })
+              } else {
+                this.$message.error(res.message)
+              }
+            }).finally(() => {
+              this.loading = false
+            })
         } else {
           return false
         }
@@ -95,9 +106,8 @@ export default {
 </script>
 
 <style lang="scss">
-
-$bg:#283443;
-$light_gray:#fff;
+$bg: #283443;
+$light_gray: #fff;
 $cursor: #fff;
 
 @supports (-webkit-mask: none) and (not (cater-color: $cursor)) {
@@ -108,7 +118,8 @@ $cursor: #fff;
 
 /* reset element-ui css */
 .login-container {
-  background-image: url('../../../static/image/wallhaven-8ogod1.jpg');
+  background-image: url("../../../static/image/wallhaven-8ogod1.jpg");
+  background-size: cover;
   .el-input {
     display: inline-block;
     height: 47px;
@@ -141,9 +152,9 @@ $cursor: #fff;
 </style>
 
 <style lang="scss" scoped>
-$bg:#2d3a4b;
-$dark_gray:#889aa4;
-$light_gray:#2F6C7F;
+$bg: #2d3a4b;
+$dark_gray: #889aa4;
+$light_gray: #2f6c7f;
 
 .login-container {
   min-height: 100%;
@@ -152,7 +163,7 @@ $light_gray:#2F6C7F;
   overflow: hidden;
 
   .login-form {
-    background-color:rgba(247, 226, 226, 0.5);
+    background-color: rgba(247, 226, 226, 0.5);
     position: relative;
     width: 520px;
     max-width: 100%;
@@ -204,7 +215,7 @@ $light_gray:#2F6C7F;
   }
 
   .el-button {
-    background-color:$light_gray ;
+    background-color: $light_gray;
   }
 }
 </style>

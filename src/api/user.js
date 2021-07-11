@@ -1,33 +1,4 @@
 import request from '@/common/js/request'
 
-export function login(data) {
-  return request({
-    url: '/vue-admin-template/user/login',
-    method: 'post',
-    data
-  })
-}
-
-export function getInfo(token) {
-  return request({
-    url: '/vue-admin-template/user/info',
-    method: 'get',
-    params: { token }
-  })
-}
-
-export function logout() {
-  return request({
-    url: '/vue-admin-template/user/logout',
-    method: 'post'
-  })
-}
-
-// 获取动态菜单
-export function getMenu() {
-  return request({
-    url: '/menu/list',
-    method: 'post'
-  })
-}
-
+export const login = (data) => request.post('/user/login', data)
+export const logout = (data) => request.post('/data/allSites', data)

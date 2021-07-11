@@ -112,8 +112,8 @@ export const searchCategory = [
       },
       {
         id: 52,
-        searchName: 'hahah',
-        url: 'baidu.com',
+        searchName: '掘金',
+        url: 'https://juejin.cn/search?query=',
         iconName: 'hah'
       }
     ]
