@@ -88,7 +88,7 @@ export default {
             .then((res) => {
               if (res.error_code === 0) {
                 console.log(res.data.token, 2)
-                sessionStorage.setItem('token', res.data.token)
+                localStorage.setItem('token', res.data.token)
                 this.$router.push({ path: '/' })
               } else {
                 this.$message.error(res.message)

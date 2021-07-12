@@ -1,6 +1,6 @@
 // import Cookies from 'js-cookie'
 
 export function getToken() {
-  return sessionStorage.getItem('token')
+  return localStorage.getItem('token')
 }
 
