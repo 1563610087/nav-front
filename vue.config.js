@@ -29,7 +29,7 @@ module.exports = {
       errors: true
     },
     proxy: {
-      '/user': {
+      '/': {
         // 需要代理的域名
         // target: 'https://service-ij349dpk-1258823847.gz.apigw.tencentcs.com/release/',
         target: 'http://localhost:7001',
