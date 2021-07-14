@@ -5,79 +5,83 @@
       :model="loginForm"
       :rules="loginRules"
       class="login-form"
-      auto-complete="on"
-      label-position="left"
     >
       <div class="title-container">
         <h3 class="title">哈哈哈</h3>
       </div>
 
       <el-form-item prop="userName">
-        <span class="svg-container" />
         <el-input
           ref="username"
           v-model="loginForm.userName"
           placeholder="Username"
-          name="username"
           type="text"
           tabindex="1"
-          auto-complete="on"
         />
       </el-form-item>
-
       <el-form-item prop="password">
-        <span class="svg-container" />
         <el-input
-          :key="passwordType"
           ref="password"
           v-model="loginForm.password"
-          :type="passwordType"
           placeholder="Password"
           name="password"
-          tabindex="2"
-          auto-complete="on"
           @keyup.enter.native="handleLogin"
         />
-        <span class="show-pwd" @click="showPwd" />
+      </el-form-item>
+      <el-form-item prop="password">
+        <el-input
+          v-model="loginForm.code"
+          placeholder="验证码"
+        />
+        <div class="code" @click="_getCode" v-html="code" />
+        <span class="text" @click="_getCode">验证码</span>
       </el-form-item>
 
       <el-button
         :loading="loading"
-        style="width: 100%; margin-bottom: 30px; color: white"
+        style="width: 100%; margin-bottom: 20px; color: white"
         @click.native.prevent="handleLogin"
       >登录</el-button>
+      <div class="footer">
+        <span>忘记密码</span>
+        <span>短信登录</span>
+      </div>
     </el-form>
   </div>
 </template>
 
 <script>
-import { login } from '@/api/user'
+import { login, getCode } from '@/api/user'
 export default {
   name: 'Login',
   data() {
     return {
       loginForm: {
-        userName: 'admin',
-        password: '111111'
+        userName: '',
+        password: '',
+        code: ''
       },
       loginRules: {
         userName: [{ required: true, trigger: 'blur' }],
-        password: [{ required: true, trigger: 'blur' }]
+        password: [{ required: true, trigger: 'blur' }],
+        code: [{ required: true, trigger: 'blur' }]
       },
+      code: '',
       loading: false,
-      passwordType: 'password',
       redirect: undefined
     }
   },
+  created() {
+    this._getCode()
+  },
   methods: {
-    showPwd() {
-      if (this.passwordType === 'password') {
-        this.passwordType = ''
-      } else {
-        this.passwordType = 'password'
-      }
-      this.$nextTick(() => {
-        this.$refs.password.focus()
+    _getCode() {
+      getCode().then(res => {
+        if (res.error_code === 0) {
+          this.code = res.data.code
+        } else {
+          this.$message.error(res.msg)
+        }
       })
     },
     handleLogin() {
@@ -123,7 +127,7 @@ $cursor: #fff;
   .el-input {
     display: inline-block;
     height: 47px;
-    width: 85%;
+    width: 60%;
 
     input {
       background: transparent;
@@ -203,19 +207,23 @@ $light_gray: #2f6c7f;
       font-weight: bold;
     }
   }
-
-  .show-pwd {
-    position: absolute;
-    right: 10px;
-    top: 7px;
-    font-size: 16px;
-    color: $dark_gray;
-    cursor: pointer;
-    user-select: none;
-  }
-
   .el-button {
     background-color: $light_gray;
+  }
+  .text {
+    color: white;
+  }
+
+  .code{
+    display: inline-block;
+    // height: 40px;
+  }
+
+  .footer{
+    width: 100%;
+    display: flex;
+    color: #2f6c7f;
+    justify-content: space-between;
   }
 }
 </style>
