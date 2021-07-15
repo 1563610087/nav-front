@@ -216,7 +216,8 @@ $light_gray: #2f6c7f;
 
   .code{
     display: inline-block;
-    // height: 40px;
+    width: 110px;
+    text-align: center;
   }
 
   .footer{
