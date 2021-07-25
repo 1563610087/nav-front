@@ -26,6 +26,10 @@ const mutations = {
 }
 
 const actions = {
+  setName({ commit }, name) {
+    console.log(name)
+    commit('SET_NAME', name)
+  }
 }
 
 export default {

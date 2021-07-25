@@ -91,7 +91,8 @@ export default {
           login(this.loginForm)
             .then((res) => {
               if (res.error_code === 0) {
-                console.log(res.data.token, 2)
+                const user = decodeURIComponent(escape(window.atob(res.data.token.split('.')[1])))
+                this.$store.commit('user/SET_NAME', user)
                 localStorage.setItem('token', res.data.token)
                 this.$router.push({ path: '/' })
               } else {

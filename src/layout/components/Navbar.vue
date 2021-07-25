@@ -6,6 +6,7 @@
       @toggleClick="toggleSideBar"
     />
     <weather />
+    <div class="name">{{ name }}</div>
     <div class="right-menu">
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
@@ -37,7 +38,7 @@ export default {
     weather
   },
   computed: {
-    ...mapGetters(['sidebar', 'avatar'])
+    ...mapGetters(['sidebar', 'avatar', 'name'])
   },
   methods: {
     toggleSideBar() {
@@ -75,6 +76,12 @@ export default {
 
   .breadcrumb-container {
     float: left;
+  }
+
+  .name{
+    position: absolute;
+    right: 90px;
+    top:15px;
   }
 
   .right-menu {
