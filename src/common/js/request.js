@@ -1,11 +1,10 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
-import store from '@/store'
 import { getToken } from '@/common/js/auth'
 
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
-  timeout: 5000
+  timeout: 10000
 })
 
 service.interceptors.request.use(
