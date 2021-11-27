@@ -82,8 +82,8 @@ export default {
     },
     handleClass() {
       const data = {
-        classify_id: this.classifyId,
-        web_name: this.addData.webName
+        classifyId: this.classifyId,
+        webName: this.addData.webName
       }
       addWeb(data).then(() => {
         this.addClassVisible = false
