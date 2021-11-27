@@ -43,6 +43,25 @@ export const searchCategory = [
     ]
   },
   {
+    id: 5,
+    type: '代码',
+    colorType: 'color-type5',
+    searchList: [
+      {
+        id: 52,
+        searchName: '掘金',
+        url: 'https://juejin.cn/search?query=',
+        iconName: 'hah'
+      },
+      {
+        id: 51,
+        searchName: 'GitHub',
+        url: 'https://github.com/search?&q=',
+        iconName: 'github'
+      }
+    ]
+  },
+  {
     id: 2,
     type: '书籍',
     colorType: 'color-type2',
@@ -99,25 +118,7 @@ export const searchCategory = [
       }
     ]
   },
-  {
-    id: 5,
-    type: '代码',
-    colorType: 'color-type5',
-    searchList: [
-      {
-        id: 51,
-        searchName: 'GitHub',
-        url: 'https://github.com/search?&q=',
-        iconName: 'github'
-      },
-      {
-        id: 52,
-        searchName: '掘金',
-        url: 'https://juejin.cn/search?query=',
-        iconName: 'hah'
-      }
-    ]
-  },
+
   {
     id: 6,
     type: '音乐',
