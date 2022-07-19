@@ -2,7 +2,7 @@
   <div class="web-container">
     <div class="title">
       <div>
-        <i class="el-icon-star-off" />
+        <i class="el-icon-star-off" contenteditable="true" />
         {{ data.web_name }}
       </div>
       <div v-if="settingStatus">

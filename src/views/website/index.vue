@@ -1,6 +1,6 @@
 <template>
   <div>
-    <SearchSite :classify-id="classifyId" :data="data" />
+    <SearchSite :classify-id="classifyId" :web-data="data" />
     <div v-for="item in data.list" :key="item.id" class="app-container">
       <WebContainer :data="item" />
     </div>
@@ -14,6 +14,7 @@ import GoTop from '@/components/goTop'
 import SearchSite from '@/components/searchSite'
 import { allSites } from '@/api/table'
 export default {
+  name: 'Website',
   components: {
     WebContainer,
     SearchSite,
