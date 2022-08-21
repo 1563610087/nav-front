@@ -12,10 +12,12 @@
     "lint": "eslint --ext .js,.vue src",
     "test:unit": "jest --clearCache && vue-cli-service test:unit",
     "test:ci": "npm run lint && npm run test:unit",
-    "docker":"docker build -t ufo-front ."
+    "docker": "docker build -t ufo-front .",
+    "docker:start":"docker run -p 80:80 -it ufo-front"
   },
   "dependencies": {
     "@mitojs/web": "^2.1.17",
+    "ali-oss": "^6.17.1",
     "axios": "0.18.1",
     "core-js": "3.6.5",
     "element-ui": "2.13.2",
@@ -24,6 +26,7 @@
     "nprogress": "0.2.0",
     "path-to-regexp": "2.4.0",
     "vue": "2.6.10",
+    "vue-cropper": "^0.5.8",
     "vue-live2d": "^1.2.4",
     "vue-router": "3.0.6",
     "vuex": "3.1.0"
